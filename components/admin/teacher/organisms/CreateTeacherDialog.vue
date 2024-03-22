@@ -9,32 +9,35 @@
     @close="dialog = false"
     @submit="createBrand"
   >
-    <class-form v-model="form" />
+    <teacher-form v-model="form" />
   </form-dialog>
 </template>
 
 <script>
 import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 import { useQueryClient } from 'vue-query'
-import ClassForm from '@/components/admin/classes/molecules/ClassForm'
 import FormDialog from '@/components/common/organisms/FormDialog'
+import TeacherForm from '~/components/admin/teacher/molecules/TeacherForm.vue'
 
 export default defineComponent({
-  name: 'CreateClassDialog',
-  components: { FormDialog, ClassForm },
+  name: 'CreateTeacherDialog',
+  components: { TeacherForm, FormDialog },
 
   setup() {
     const dialog = ref(false)
-    const { $api, $moment } = useContext()
+    const { $api } = useContext()
     const queryClient = useQueryClient()
     const loading = ref(false)
 
     const initialForm = () => ({
       name: null,
       code: null,
-      gv: null,
-      startDate: $moment().format('YYYY-MM-DD'),
-      endDate: $moment().format('YYYY-MM-DD')
+      phone: null,
+      email: null,
+      matKhau: null,
+      image: null,
+      image_url: null,
+      maKhoa: null
     })
     const form = ref(initialForm())
 
@@ -45,11 +48,11 @@ export default defineComponent({
 
     const createBrand = () => {
       loading.value = true
-      $api.classroom
-        .createClassroom(form.value)
+      $api.user
+        .createUser(form.value)
         .then(() => {
           dialog.value = false
-          queryClient.invalidateQueries('classrooms')
+          queryClient.invalidateQueries('teachers')
         })
         .finally(() => {
           loading.value = false

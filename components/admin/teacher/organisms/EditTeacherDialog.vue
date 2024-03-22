@@ -4,12 +4,12 @@
     v-model="dialog"
     :loading="loading"
     submit-text="Lưu"
-    title="Sửa lớp học phần"
+    title="Sửa giảng viên"
     width="700px"
     @close="dialog = false"
     @submit="submit"
   >
-    <class-form v-model="form" />
+    <teacher-form v-model="form" />
   </form-dialog>
 </template>
 
@@ -17,12 +17,12 @@
 import { defineComponent, reactive, ref, useContext, toRef } from '@nuxtjs/composition-api'
 import { useQueryClient } from 'vue-query'
 import { serialize } from 'object-to-formdata'
-import ClassForm from '@/components/admin/classes/molecules/ClassForm'
 import FormDialog from '@/components/common/organisms/FormDialog'
+import TeacherForm from '~/components/admin/teacher/molecules/TeacherForm.vue'
 
 export default defineComponent({
-  name: 'EditBrandDialog',
-  components: { FormDialog, ClassForm },
+  name: 'EditTeacherDialog',
+  components: { TeacherForm, FormDialog },
 
   setup() {
     const initialState = () => ({
@@ -45,14 +45,18 @@ export default defineComponent({
         id: state.form.id,
         name: state.form.name,
         code: state.form.code,
+        email: state.form.email,
+        phone: state.form.phone,
+        matKhau: state.form.matKhau,
         image: state.form.image,
-        image_url: state.form.image_url
+        image_url: state.form.image_url,
+        maKhoa: state.form.maKhoa
       }
-      $api.brand
-        .updateBrand(state.form.id, serialize(form))
+      $api.user
+        .updateUser(state.form.id, serialize(form))
         .then(() => {
           dialog.value = false
-          queryClient.invalidateQueries('brands')
+          queryClient.invalidateQueries('users')
         })
         .finally(() => {
           loading.value = false

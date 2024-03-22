@@ -1,6 +1,6 @@
 export default ($axios) => ({
   async getCategories(params) {
-    return await $axios.$get('/test.php', { params })
+    return await $axios.$get('/students', { params })
   },
   async createCategory(data) {
     return await $axios.$post('/categories', data)

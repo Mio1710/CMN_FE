@@ -1,24 +1,19 @@
 <template>
   <v-row dense>
     <v-col cols="12">
-      <v-card class="pa-2">
-        <v-img contain height="200" :src="form.image_url || '/images/brand/default.png'" />
-        <v-card-text class="px-0 pb-0">
-          <app-file-input
-            v-model="form.image"
-            accept="image/jpg, image/jpeg, image/png"
-            label="Image"
-            :rules="form.image_url ? '' : 'required'"
-            @change="onFileChange"
-          />
-        </v-card-text>
-      </v-card>
+      <app-text-field v-model="form.name" label="Tên lớp" rules="required|max:100" vid="name" />
     </v-col>
-    <v-col cols="12">
-      <app-text-field v-model="form.name" label="Tên thương hiệu" rules="required|max:100" vid="name" />
+    <v-col cols="6">
+      <app-text-field v-model="form.code" label="Mã lớp" rules="required|max:100" vid="code" />
     </v-col>
-    <v-col cols="12">
-      <app-text-field v-model="form.code" label="Mã thương hiệu" rules="required|max:100" vid="code" />
+    <v-col cols="6">
+      <teacher-autocomplete v-model="form.teacher_id" label="Giảng viên" rules="required" vid="teacher_id" />
+    </v-col>
+    <v-col cols="6">
+      <app-date-picker v-model="form.startDate" label="Ngày bắt đầu" rules="required" vid="startDate" />
+    </v-col>
+    <v-col cols="6">
+      <app-date-picker v-model="form.endDate" label="Ngày kết thúc" rules="required" vid="endDate" />
     </v-col>
   </v-row>
 </template>
@@ -26,11 +21,12 @@
 <script>
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 import AppTextField from '@/components/common/atoms/AppTextField.vue'
-import AppFileInput from '@/components/common/atoms/AppFileInput'
+import TeacherAutocomplete from '~/components/common/share/TeacherAutocomplete.vue'
+import AppDatePicker from '~/components/common/atoms/AppDatePicker.vue'
 
 export default defineComponent({
   name: 'ClassForm',
-  components: { AppTextField, AppFileInput },
+  components: { AppDatePicker, TeacherAutocomplete, AppTextField },
   props: {
     value: {
       type: Object,
@@ -45,18 +41,8 @@ export default defineComponent({
       }
     })
 
-    const onFileChange = (file) => {
-      if (file) {
-        form.value.image_url = URL.createObjectURL(form.value.image)
-        URL.revokeObjectURL(file)
-      } else {
-        form.value.image_url = null
-      }
-    }
-
     return {
-      form,
-      onFileChange
+      form
     }
   }
 })

@@ -56,9 +56,9 @@ export default {
         icon: 'mdi-tag-heart'
       },
       {
-        name: 'Trang cá nhân',
+        name: 'Quản lý khoa',
         key: 7,
-        link: '/admin/profile',
+        link: '/admin/faculties',
         icon: 'mdi-account'
       }
     ]

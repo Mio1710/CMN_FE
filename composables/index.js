@@ -6,6 +6,8 @@ import useGetCategories from '@/composables/use-get-category'
 import useGetBrands from '@/composables/use-get-brand'
 import useGetCarts from '@/composables/use-get-cart'
 import useGetPaymentMethods from '@/composables/use-get-payment-method'
+import useGetClassrooms from '@/composables/use-get-classroom'
+import useGetFaculties from '~/composables/use-get-faculty'
 
 export {
   useGetUsers,
@@ -15,5 +17,7 @@ export {
   useGetBrands,
   useGetOrders,
   useGetCarts,
-  useGetPaymentMethods
+  useGetPaymentMethods,
+  useGetClassrooms,
+  useGetFaculties
 }

@@ -4,37 +4,34 @@
     v-model="dialog"
     :loading="loading"
     submit-text="Lưu"
-    title="Thêm lớp học phần"
+    title="Thêm Khoa"
     width="700px"
     @close="dialog = false"
-    @submit="createBrand"
+    @submit="createCategory"
   >
-    <class-form v-model="form" />
+    <faculty-form v-model="form" />
   </form-dialog>
 </template>
 
 <script>
 import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 import { useQueryClient } from 'vue-query'
-import ClassForm from '@/components/admin/classes/molecules/ClassForm'
 import FormDialog from '@/components/common/organisms/FormDialog'
+import FacultyForm from '~/components/admin/faculty/molecules/FacultyForm.vue'
 
 export default defineComponent({
-  name: 'CreateClassDialog',
-  components: { FormDialog, ClassForm },
+  name: 'CreateFacultyDialog',
+  components: { FacultyForm, FormDialog },
 
   setup() {
     const dialog = ref(false)
-    const { $api, $moment } = useContext()
+    const { $api } = useContext()
     const queryClient = useQueryClient()
     const loading = ref(false)
 
     const initialForm = () => ({
-      name: null,
-      code: null,
-      gv: null,
-      startDate: $moment().format('YYYY-MM-DD'),
-      endDate: $moment().format('YYYY-MM-DD')
+      ten: null,
+      maKhoa: null
     })
     const form = ref(initialForm())
 
@@ -43,13 +40,13 @@ export default defineComponent({
       form.value = initialForm()
     }
 
-    const createBrand = () => {
+    const createCategory = () => {
       loading.value = true
-      $api.classroom
-        .createClassroom(form.value)
+      $api.faculty
+        .createFaculty(form.value)
         .then(() => {
           dialog.value = false
-          queryClient.invalidateQueries('classrooms')
+          queryClient.invalidateQueries('faculties')
         })
         .finally(() => {
           loading.value = false
@@ -59,12 +56,10 @@ export default defineComponent({
     return {
       dialog,
       form,
-      createBrand,
+      createCategory,
       loading,
       open
     }
   }
 })
 </script>
-
-<style scoped></style>

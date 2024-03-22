@@ -5,7 +5,7 @@
       <!-- Navigation menu info -->
       <template #prepend>
         <div class="pa-2">
-          <div class="title font-weight-bold text-uppercase white--text">ELE - DEVICE Admin</div>
+          <div class="title font-weight-bold text-uppercase white--text">TTDN</div>
         </div>
       </template>
       <main-menu />

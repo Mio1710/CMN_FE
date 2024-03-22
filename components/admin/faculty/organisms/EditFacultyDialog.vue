@@ -4,25 +4,24 @@
     v-model="dialog"
     :loading="loading"
     submit-text="Lưu"
-    title="Sửa lớp học phần"
+    title="Sửa thông tin khoa"
     width="700px"
     @close="dialog = false"
     @submit="submit"
   >
-    <class-form v-model="form" />
+    <faculty-form v-model="form" is-update />
   </form-dialog>
 </template>
 
 <script>
 import { defineComponent, reactive, ref, useContext, toRef } from '@nuxtjs/composition-api'
 import { useQueryClient } from 'vue-query'
-import { serialize } from 'object-to-formdata'
-import ClassForm from '@/components/admin/classes/molecules/ClassForm'
 import FormDialog from '@/components/common/organisms/FormDialog'
+import FacultyForm from '~/components/admin/faculty/molecules/FacultyForm.vue'
 
 export default defineComponent({
-  name: 'EditBrandDialog',
-  components: { FormDialog, ClassForm },
+  name: 'EditFacultyDialog',
+  components: { FacultyForm, FormDialog },
 
   setup() {
     const initialState = () => ({
@@ -41,18 +40,11 @@ export default defineComponent({
 
     const submit = () => {
       loading.value = true
-      const form = {
-        id: state.form.id,
-        name: state.form.name,
-        code: state.form.code,
-        image: state.form.image,
-        image_url: state.form.image_url
-      }
-      $api.brand
-        .updateBrand(state.form.id, serialize(form))
+      $api.faculty
+        .updateFaculty(state.form.id, state.form)
         .then(() => {
           dialog.value = false
-          queryClient.invalidateQueries('brands')
+          queryClient.invalidateQueries('faculties')
         })
         .finally(() => {
           loading.value = false
@@ -69,5 +61,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped></style>
