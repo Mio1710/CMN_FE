@@ -4,6 +4,7 @@
     v-bind="$attrs"
     cache-items
     :clearable="clearable"
+    item-text="ten"
     :items="items"
     :loading="isLoading"
     :multiple="multiple"

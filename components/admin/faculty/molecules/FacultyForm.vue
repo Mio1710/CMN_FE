@@ -1,7 +1,7 @@
 <template>
   <v-row dense>
     <v-col cols="12">
-      <app-text-field v-model="form.maKhoa" label="Mã khoa" rules="required|max:100" vid="maKhoa" />
+      <app-text-field v-model="form.maKhoa" label="Mã khoa" rules="required|max:10" vid="maKhoa" />
     </v-col>
     <v-col cols="12">
       <app-text-field v-model="form.ten" label="Tên khoa" rules="required|max:100" vid="ten" />

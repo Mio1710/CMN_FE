@@ -32,6 +32,12 @@ export default {
         icon: 'mdi-shape'
       },
       {
+        name: 'Hat',
+        key: 9,
+        link: '/admin/hats',
+        icon: 'mdi-shape'
+      },
+      {
         name: 'Quản lý người dùng',
         key: 3,
         link: '/admin/users',

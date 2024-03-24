@@ -1,8 +1,12 @@
 <template>
   <v-row dense>
     <v-col cols="6">
+      <div class="d-flex justify-center">
+        <div class="rounded-circle overflow-hidden h-[150px] w-[150px] bg-amber-300">
+          <v-img height="100%" max-height="100%" :src="form.image_url || '/images/product/default.png'" />
+        </div>
+      </div>
       <v-card class="pa-2">
-        <v-img contain height="200" :src="form.image_url || '/images/product/default.png'" />
         <v-card-text class="px-0 pb-0">
           <app-file-input
             v-model="form.image"
@@ -15,16 +19,26 @@
       </v-card>
     </v-col>
     <v-col cols="6">
-      <app-text-field v-model="form.maso" label="Mã giảng viên" rules="required|max:100" vid="maso" />
-    </v-col>
-    <v-col cols="12">
-      <app-text-field v-model="form.ten" label="Tên giảng viên" rules="required|max:100" vid="ten" />
+      <v-row>
+        <v-col cols="12">
+          <app-text-field v-model="form.maso" label="Mã giảng viên" rules="required|max:100" vid="maso" />
+        </v-col>
+        <v-col cols="12">
+          <app-text-field v-model="form.hodem" label="Họ đệm" rules="required|max:100" vid="hodem" />
+        </v-col>
+        <v-col cols="12">
+          <app-text-field v-model="form.ten" label="Tên giảng viên" rules="required|max:100" vid="ten" />
+        </v-col>
+        <v-col cols="12">
+          <app-text-field v-model="form.email" label="Email" rules="required" vid="email" />
+        </v-col>
+      </v-row>
     </v-col>
     <v-col cols="6">
-      <app-text-field v-model="form.email" label="Email" rules="required" vid="email" />
+      <app-text-field v-model="form.phone" label="Số điện thoại" vid="sdt" />
     </v-col>
     <v-col cols="6">
-      <faculty-autocomplete v-model="form.maKhoa" label="Khoa" rules="required" vid="maKhoa" />
+      <faculty-autocomplete v-model="form.maKhoa" label="Khoa" :ma-khoa="form.maKhoa" rules="required" vid="maKhoa" />
     </v-col>
     <v-col cols="6">
       <app-password v-model="form.matKhau" label="Mật khẩu" rules="required" vid="matKhau" />

@@ -20,13 +20,12 @@ export default function useGetUsers(params = {}, options = {}) {
         ...params.value
       }).query()
 
-      console.log('query', query)
       return $api.user.getUsers(query)
     },
     options
   )
 
-  const items = computed(() => query.data.value?.data || [])
+  const items = computed(() => query.data.value || [])
   const totalItems = computed(() => query.data.value?.pagination?.total || 0)
 
   return {

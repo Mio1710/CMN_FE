@@ -4,7 +4,7 @@
     v-model="dialog"
     :loading="loading"
     submit-text="Lưu"
-    title="Thêm lớp học phần"
+    title="Thêm Giảng viên"
     width="700px"
     @close="dialog = false"
     @submit="createBrand"
@@ -30,14 +30,16 @@ export default defineComponent({
     const loading = ref(false)
 
     const initialForm = () => ({
-      name: null,
-      code: null,
+      hodem: null,
+      ten: null,
+      maso: null,
       phone: null,
       email: null,
       matKhau: null,
       image: null,
       image_url: null,
-      maKhoa: null
+      maKhoa: null,
+      type: 'teacher'
     })
     const form = ref(initialForm())
 
@@ -52,7 +54,7 @@ export default defineComponent({
         .createUser(form.value)
         .then(() => {
           dialog.value = false
-          queryClient.invalidateQueries('teachers')
+          queryClient.invalidateQueries('users')
         })
         .finally(() => {
           loading.value = false
