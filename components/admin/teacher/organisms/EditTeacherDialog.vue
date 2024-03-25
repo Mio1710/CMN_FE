@@ -16,7 +16,7 @@
 <script>
 import { defineComponent, reactive, ref, useContext, toRef } from '@nuxtjs/composition-api'
 import { useQueryClient } from 'vue-query'
-import { serialize } from 'object-to-formdata'
+// import { serialize } from 'object-to-formdata'
 import FormDialog from '@/components/common/organisms/FormDialog'
 import TeacherForm from '~/components/admin/teacher/molecules/TeacherForm.vue'
 
@@ -41,19 +41,20 @@ export default defineComponent({
 
     const submit = () => {
       loading.value = true
-      const form = {
-        id: state.form.id,
-        name: state.form.name,
-        code: state.form.code,
-        email: state.form.email,
-        phone: state.form.phone,
-        matKhau: state.form.matKhau,
-        image: state.form.image,
-        image_url: state.form.image_url,
-        maKhoa: state.form.maKhoa
-      }
+      // const form = {
+      //   id: state.form.id,
+      //   hodem: state.form.hodem,
+      //   ten: state.form.ten,
+      //   maso: state.form.maso,
+      //   email: state.form.email,
+      //   phone: state.form.phone,
+      //   matKhau: state.form.matKhau,
+      //   image: state.form.image,
+      //   image_url: state.form.image_url,
+      //   maKhoa: state.form.maKhoa
+      // }
       $api.user
-        .updateUser(state.form.id, serialize(form))
+        .updateUser(state.form.id, state.form)
         .then(() => {
           dialog.value = false
           queryClient.invalidateQueries('users')

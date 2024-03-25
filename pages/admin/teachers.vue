@@ -73,7 +73,7 @@ export default defineComponent({
       filters: {
         q: '',
         type: 'teacher',
-        include: ['khoa', 'a']
+        include: ['faculty']
       },
       sorts: '-created_at',
       page: 1,
@@ -90,7 +90,7 @@ export default defineComponent({
         { text: 'Tên', value: 'ten' },
         { text: 'Số điện thoại', value: 'phone' },
         { text: 'Email', value: 'email' },
-        { text: 'Khoa', value: 'tenKhoa' },
+        { text: 'Khoa', value: 'faculty.ten' },
         { text: '', value: 'action', align: 'right', sortable: false }
       ],
       selectedItems: []
